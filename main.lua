@@ -5,6 +5,7 @@ function love.load ()
     require('Entity')
     require('Player')
     require('Enemie')
+    require('Gun')
 
     game = Game()
 end
