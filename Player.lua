@@ -1,11 +1,11 @@
 Player = Entity:extend()
 
-function Player:new(x, y, imgPath, acelHoriz, acelVert, left, right, up, down, shoot)
+function Player:new(x, y, imgPath, left, right, up, down, shoot)
     local imgs = {}
     for i = 1, 7 do
         table.insert(imgs, love.graphics.newImage(imgPath .. '/' .. i .. ".png"))
     end
-    Player.super:new(x, y, imgs, acelHoriz, acelVert, 200, 200)
+    Player.super:new(x, y, imgs, 150, 150)
     self.gun = Gun()
     self.left = left or 'left'
     self.right = right or 'right'
