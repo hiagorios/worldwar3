@@ -1,15 +1,27 @@
-Enemie = Entity:extend()
+Enemie = Object:extend()
 
 function Enemie:new(x, y, imgPath)
-    local imgs = {}
+    self.x = x
+    self.y = y
+    self.direction = 1
+    self.velX = 0
+    self.velY = 0
+    self.acelY = 0
+    self.acelX = 0
+    self.acelHoriz = 150
+    self.acelVert = 150
+    
+    self.imgs = {}
+    self.currentImg = 1
     for i = 1, 7 do
-        table.insert(imgs, love.graphics.newImage(imgPath .. '/' .. i .. ".png"))
+        table.insert(self.imgs, love.graphics.newImage(imgPath .. '/' .. i .. ".png"))
     end
-    Enemie.super:new(x, y, imgs, 150, 150)
+    self.width= self.imgs[1]:getWidth()
+    self.height= self.imgs[1]:getHeight()
 end
 
 function Enemie:update(dt)
-    Enemie:animate(dt)
+    self:animate(dt)
     self.x = self.x + dt
 end
 

@@ -2,7 +2,6 @@ function love.load ()
     Object = require('classic')
 
     require('Game')
-    require('Entity')
     require('Player')
     require('Enemie')
     require('Gun')
