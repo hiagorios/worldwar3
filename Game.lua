@@ -9,12 +9,12 @@ function Game:new()
     menuTrack = love.audio.newSource("assets/audio/menu.ogg", "stream")
     ingameTrack = love.audio.newSource("assets/audio/ingame.mp3", "stream")
     --]]
-    player = Player(screenWidth/2, screenHeight/2, 'assets/image/playerRed', 100, 100)
+    player = Player(screenWidth/2, screenHeight/2, 'assets/image/playerRed', 150, 150)
     background = love.graphics.newImage("assets/image/background.png")
 end
 
-function Game:update()
-    player:update()
+function Game:update(dt)
+    player:update(dt)
 end
 
 function Game:draw()

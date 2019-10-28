@@ -22,21 +22,39 @@ function Entity:update(dt)
 end
 
 function Entity:draw()
-    love.graphics.draw(self.imgs[self.currentImg], self.x, self.y)
+
 end
 
-function Entity:moveUp()
+function Entity:moveUp(dt)
     self.acelY = -self.acelVert
+    self.y = self.y + self.acelY*dt
 end
 
-function Entity:moveDown()
+function Entity:moveDown(dt)
     self.acelY = self.acelVert
+    self.y = self.y + self.acelY*dt
 end
 
-function Entity:moveLeft()
+function Entity:moveLeft(dt)
     self.acelX = -self.acelHoriz
+    self.x = self.x + self.acelX*dt
 end
 
-function Entity:moveRight()
+function Entity:moveRight(dt)
     self.acelX = self.acelHoriz
+    self.x = self.x + self.acelX*dt
+end
+
+function Entity:rotateLeft()
+    if self.direction == 1 then
+        self.direction = -1
+        self.x = self.x + self.width
+    end
+end
+
+function Entity:rotateRight()
+    if self.direction == -1 then
+        self.direction = 1
+        self.x = self.x - self.width
+    end
 end
