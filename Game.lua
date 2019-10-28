@@ -9,7 +9,7 @@ function Game:new()
     menuTrack = love.audio.newSource("assets/audio/menu.ogg", "stream")
     ingameTrack = love.audio.newSource("assets/audio/ingame.mp3", "stream")
     --]]
-    player = Player(screenWidth/2, screenHeight/2, love.graphics.newImage('assets/image/playerRed.png'), 100, 100)
+    player = Player(screenWidth/2, screenHeight/2, 'assets/image/playerRed', 100, 100)
     background = love.graphics.newImage("assets/image/background.png")
 end
 
