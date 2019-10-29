@@ -46,7 +46,7 @@ function Menu:draw(dt)
     love.graphics.draw(self.backImageFront, self.x - 2*self.boxH, self.y-self.offsetY*3)
     love.graphics.draw(self.image, self.x - 2*self.boxH, self.yBox)
     for i, option in pairs(self.options) do 
-        love.graphics.print(option, self.x, self.y + (self.yOption * self.offsetY*5))
+        love.graphics.print(option, self.x - #option*2, self.y + (self.yOption * self.offsetY*5))
         self.yOption = self.yOption + 1
     end
     love.graphics.print(self.optionSelect, 100, 100)

@@ -75,18 +75,36 @@ end
 function Player:moveUp(dt)
     self.acelY = -self.acelVert
     self.y = self.y + self.acelY*dt
-    self.x = self.x + self.direction*self.size
+
+    local extremidade = false
     if self.y < love.graphics.getHeight()/6 then
         self.y = love.graphics.getHeight()/6
+        extremidade = true
+    end
+    if not extremidade then
+        if self.direction == 1 then
+            self.x = self.x + self.size
+        else
+            self.x = self.x - self.size
+        end
     end
 end
 
 function Player:moveDown(dt)
     self.acelY = self.acelVert
     self.y = self.y + self.acelY*dt
-    self.x = self.x - self.direction*self.size
+    
+    local extremidade = false
     if self.y + self.height*self.size > love.graphics.getHeight() then
         self.y = love.graphics.getHeight() - self.height*self.size
+        extremidade = true
+    end
+    if not extremidade then
+        if self.direction == 1 then
+            self.x = self.x - self.size
+        else
+            self.x = self.x + self.size
+        end
     end
 end
 

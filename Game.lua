@@ -11,7 +11,7 @@ function Game:new()
     ingameTrack = love.audio.newSource("assets/audio/ingame.mp3", "stream")
     --]]
     background = love.graphics.newImage("assets/image/background.png")
-    menu = Menu(200, 500, {'Start Game 1P','Start Game 2P', 'Exit'}, "assets/image/")
+    menu = Menu(200, screenWidth/2 - 20, {'Start Game 1P','Start Game 2P', 'Exit'}, "assets/image/")
     players = {
         player = Player(screenWidth/2, screenHeight/2, 'assets/image/playerRed'),
     }
