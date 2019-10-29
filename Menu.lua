@@ -1,6 +1,6 @@
 Menu = Object:extend()
 
-function Menu:new(y,x, options, imgPath)
+function Menu:new(x,y, options, imgPath)
     self.image = love.graphics.newImage(imgPath.. "box.png")
     self.backImage = love.graphics.newImage(imgPath.. "menu.png")
     self.backImageFront = love.graphics.newImage(imgPath.. "menu2.png")

@@ -2,6 +2,7 @@ Gun = Object:extend()
 
 function Gun:new()
     self.image = love.graphics.newImage("assets/image/gun2.png")
+    --self.image = love.graphics.newImage("assets/image/shoot.png")
 end
 
 function Gun:update()

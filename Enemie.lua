@@ -45,8 +45,8 @@ function Enemie:update(dt)
 end
 
 function Enemie:draw()
-    love.graphics.draw(self.image,  self.quad, self.x, self.y, 0, self.direction*self.size, self.size)    
-    love.graphics.rectangle( "line", self.x, self.y, self.width*self.direction, self.height )
+    love.graphics.draw(self.image,  self.quad, self.x, self.y, 0, self.direction*self.size, self.size)
+    love.graphics.rectangle( "line", self.x, self.y, self.width*self.direction*self.size, self.height*self.size )
     love.graphics.print(self.state, self.x, self.y)
 end
 
