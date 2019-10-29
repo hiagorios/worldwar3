@@ -5,13 +5,13 @@ function Game:new()
     love.window.setTitle('Guerra de espada 2019')
     screenHeight = love.graphics.getHeight()
     screenWidth = love.graphics.getWidth()
+    love.graphics.setNewFont("assets/fonts/vcr.ttf", 20)
     --[[
-    love.graphics.setNewFont("assets/font/soopafre.ttf", 50)
     menuTrack = love.audio.newSource("assets/audio/menu.ogg", "stream")
     ingameTrack = love.audio.newSource("assets/audio/ingame.mp3", "stream")
     --]]
     background = love.graphics.newImage("assets/image/background.png")
-    menu = Menu(200, screenWidth/2 - 20, {'Start Game 1P','Start Game 2P', 'Exit'}, "assets/image/")
+    menu = Menu(screenWidth/2 - 20, 200, {'Start Game 1P','Start Game 2P', 'Exit'}, "assets/image/")
     players = {
         player = Player(screenWidth/2, screenHeight/2, 'assets/image/playerRed'),
     }
