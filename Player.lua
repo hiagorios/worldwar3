@@ -4,12 +4,11 @@ function Player:new(x, y, imgPath, left, right, up, down, shoot)
     self.x = x
     self.y = y
     self.direction = 1
-    self.velX = 0
-    self.velY = 0
     self.acelY = 0
     self.acelX = 0
-    self.acelHoriz = 150
+    self.acelHoriz = 200
     self.acelVert = 150
+    self.size = self.y*0.004
 
     self.gun = Gun()
     self.left = left or 'left'
@@ -50,10 +49,11 @@ function Player:update(dt)
     if love.keyboard:isDown(self.shoot) then
         self.gun:shoot()
     end
+    self.size = self.y*0.004
 end
 
 function Player:draw()
-    love.graphics.draw(self.imgs[math.floor(self.currentImg)], self.x, self.y, 0, self.direction, 1)
+    love.graphics.draw(self.imgs[math.floor(self.currentImg)], self.x, self.y, 0, self.direction*self.size, self.size)
 end
 
 function Player:animate(dt)
@@ -66,11 +66,19 @@ end
 function Player:moveUp(dt)
     self.acelY = -self.acelVert
     self.y = self.y + self.acelY*dt
+    self.x = self.x + self.direction*self.size
+    if self.y < love.graphics.getHeight()/6 then
+        self.y = love.graphics.getHeight()/6
+    end
 end
 
 function Player:moveDown(dt)
     self.acelY = self.acelVert
     self.y = self.y + self.acelY*dt
+    self.x = self.x - self.direction*self.size
+    if self.y + self.height*self.size > love.graphics.getHeight() then
+        self.y = love.graphics.getHeight() - self.height*self.size
+    end
 end
 
 function Player:moveLeft(dt)
@@ -86,13 +94,13 @@ end
 function Player:rotateLeft()
     if self.direction == 1 then
         self.direction = -1
-        self.x = self.x + self.width
+        self.x = self.x + self.width*self.size
     end
 end
 
 function Player:rotateRight()
     if self.direction == -1 then
         self.direction = 1
-        self.x = self.x - self.width
+        self.x = self.x - self.width*self.size
     end
 end
