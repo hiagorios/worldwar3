@@ -1,10 +1,8 @@
 Entity = Object:extend()
 
-function Entity:new(x, y, img, acelHoriz, acelVert, quadWidth, quadHeight)
+function Entity:new(x, y, imgs, acelHoriz, acelVert)
     self.x = x
     self.y = y
-    self.img = img
-    self.currentQuad = 0
     self.direction = 1
     self.velX = 0
     self.velY = 0
@@ -12,18 +10,11 @@ function Entity:new(x, y, img, acelHoriz, acelVert, quadWidth, quadHeight)
     self.acelX = 0
     self.acelHoriz = acelHoriz
     self.acelVert = acelVert
-
-    self.quads = {}
-    self.imgWidth= self.img:getWidth()
-    self.imgHeight= self.img:getHeight()
-    self.quadHeight = quadHeight
-    self.quadWidth = quadWidth
-    for y = 0, self.imgHeight - self.quadHeight, self.quadHeight do
-        for x = 0, self.imgWidth - self.quadWidth, self.quadWidth do
-            local quad = love.graphics.newQuad(self.x, self.y, self.quadWidth, self.quadHeight, self.imgWidth, self.imgHeight)
-            table.insert(self.quads, quad)
-        end
-    end
+    
+    self.imgs = imgs
+    self.currentImg = 1
+    self.width= self.imgs[1]:getWidth()
+    self.height= self.imgs[1]:getHeight()
 end
 
 function Entity:update(dt)
@@ -31,21 +22,39 @@ function Entity:update(dt)
 end
 
 function Entity:draw()
-    
+
 end
 
-function Entity:moveUp()
+function Entity:moveUp(dt)
     self.acelY = -self.acelVert
+    self.y = self.y + self.acelY*dt
 end
 
-function Entity:moveDown()
+function Entity:moveDown(dt)
     self.acelY = self.acelVert
+    self.y = self.y + self.acelY*dt
 end
 
-function Entity:moveLeft()
+function Entity:moveLeft(dt)
     self.acelX = -self.acelHoriz
+    self.x = self.x + self.acelX*dt
 end
 
-function Entity:moveRight()
+function Entity:moveRight(dt)
     self.acelX = self.acelHoriz
+    self.x = self.x + self.acelX*dt
+end
+
+function Entity:rotateLeft()
+    if self.direction == 1 then
+        self.direction = -1
+        self.x = self.x + self.width
+    end
+end
+
+function Entity:rotateRight()
+    if self.direction == -1 then
+        self.direction = 1
+        self.x = self.x - self.width
+    end
 end
