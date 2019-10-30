@@ -41,7 +41,7 @@ end
 
 function Firework:draw()
     love.graphics.draw(self.image, self.quad, self.x, self.y, 0, -self.direction*self.size, self.size)
-    self.hitbox:draw()
+    --self.hitbox:draw()
 end
 
 function Firework:mustBeRemoved()

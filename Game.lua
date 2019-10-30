@@ -77,7 +77,10 @@ function Game:draw()
         for i, player in pairs(players) do 
             player:draw()
         end
-        love.graphics.print('Enemies ' .. #enemies, 0, 0, 0, 2, 2)
+        love.graphics.setColor(0,0,0)
+        love.graphics.rectangle('fill', 0, 0, 200, 40)
+        love.graphics.setColor(255,255,255)
+        love.graphics.print('Score:' .. score, 0, 0, 0, 2, 2)
         for i, enemie in pairs(enemies) do
             enemie:draw(dt)
         end
@@ -90,8 +93,8 @@ end
 
 function createEnemie()
     local enemie = Enemie(0, 0, 'assets/image/playerGreen', love.math.random(screenWidth*2/3, screenWidth))
-    --enemie.y = love.math.random(love.graphics.getHeight()/6, screenHeight - enemie.height)
-    enemie.y = screenHeight/2
+    enemie.y = love.math.random(love.graphics.getHeight()/6, screenHeight - enemie.height)
+    --enemie.y = screenHeight/2
     enemie.x = love.math.random(0,1)*(screenWidth + enemie.width)
     if enemie.x == 0 then
         enemie.x = -enemie.width
@@ -108,8 +111,8 @@ end
 
 function generateEnemies(dt)
     dtEnemies = dtEnemies - dt
-    if dtEnemies <= 0 and #enemies <=3 then
+    if dtEnemies <= 0 and #enemies <=5 then
         table.insert(enemies, createEnemie())
-        dtEnemies = 2
+        dtEnemies = 1
     end
 end

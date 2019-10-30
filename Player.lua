@@ -57,7 +57,7 @@ function Player:update(dt)
 end
 
 function Player:draw()
-    self.hitbox:draw()
+    --self.hitbox:draw()
     self.gun:draw(self.quad, self.x, self.y, self.direction*self.size, self.size)
     love.graphics.draw(self.image,  self.quad, self.x, self.y, 0, self.direction*self.size, self.size)
     for i = 1, self.life do
