@@ -17,6 +17,8 @@ function Enemie:new(x, y, imgPath, shootPosition)
     self.height = 150
     self.quad = love.graphics.newQuad(0, 0, self.width, self.height, self.image:getDimensions())
     self.state = 'entering'
+
+    self.hitbox = HitBox(self.x + self.size*self.direction*self.width/3, self.y + self.size*20, self.width/2*self.direction*self.size, (self.height - 35)*self.size, self.direction)
 end
 
 function Enemie:update(dt)
@@ -42,11 +44,12 @@ function Enemie:update(dt)
         self:animate(dt)
         self.x = self.x + self.direction*self.acelHoriz*dt
     end
+    self.hitbox:update(self.x + self.size*self.direction*self.width/3, self.y + self.size*20, self.width/2*self.direction*self.size, (self.height - 35)*self.size, self.direction)
 end
 
 function Enemie:draw()
     love.graphics.draw(self.image,  self.quad, self.x, self.y, 0, self.direction*self.size, self.size)
-    love.graphics.rectangle( "line", self.x, self.y, self.width*self.direction*self.size, self.height*self.size )
+    self.hitbox:draw()
     love.graphics.print(self.state, self.x, self.y)
 end
 

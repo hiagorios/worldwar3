@@ -34,6 +34,13 @@ function Game:update(dt)
                 table.remove(enemies, i)
             end
         end
+        for i, player in pairs(players) do 
+            for j, enemie in pairs(enemies) do 
+                if player.hitbox:checkColision(enemie.hitbox) then
+                    table.remove(enemies, j)
+                end
+            end
+        end
         generateEnemies(dt)
     elseif menu:getState() == 0 and love.keyboard.isDown("return") then
         if menu:getSelected() == 2 then
@@ -67,7 +74,8 @@ end
 
 function createEnemie()
     local enemie = Enemie(0, 0, 'assets/image/playerRed', love.math.random(screenWidth*2/3, screenWidth))
-    enemie.y = love.math.random(love.graphics.getHeight()/6, screenHeight - enemie.height)
+    --enemie.y = love.math.random(love.graphics.getHeight()/6, screenHeight - enemie.height)
+    enemie.y = screenHeight/2
     enemie.x = love.math.random(0,1)*(screenWidth + enemie.width)
     if enemie.x == 0 then
         enemie.x = -enemie.width
