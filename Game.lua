@@ -70,9 +70,8 @@ function Game:update(dt)
         menu:update(dt)
         menuTrack:play()
     elseif menu:getState() == 2 and love.keyboard.isDown("return") then
-        self = Game()
         ingameTrack:stop()
-        menuTrack:play()
+        self = Game()
     end
 end
 

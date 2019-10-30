@@ -49,7 +49,5 @@ function Menu:draw(dt)
         love.graphics.print(option, self.x - #option*4, self.y + (self.yOption * self.offsetY*6))
         self.yOption = self.yOption + 1
     end
-    love.graphics.print(self.optionSelect, 100, 100)
-    love.graphics.print(self.internalState, 100, 110)
     self.yOption = 0
 end
