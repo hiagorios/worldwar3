@@ -16,7 +16,7 @@ function Game:new()
         player = Player(screenWidth/2, screenHeight/2, 'assets/image/playerRed'),
     }
     player2 = Player(screenWidth/2 - 100, screenHeight/2, 'assets/image/playerRed', "a", "d", "w", "s", "space")
-
+    score = 0
     enemies = {}
     dtEnemies = 2
     state = 0
@@ -34,10 +34,23 @@ function Game:update(dt)
                 table.remove(enemies, i)
             end
         end
-        for i, player in pairs(players) do 
-            for j, enemie in pairs(enemies) do 
-                if player.hitbox:checkColision(enemie.hitbox) then
-                    table.remove(enemies, j)
+        for i, player in pairs(players) do
+            for j, enemie in pairs(enemies) do
+                for k, shoot in pairs(player.gun.fireworks) do
+                    if enemie.hitbox:checkColision(shoot.hitbox) then
+                        table.remove(enemies, j)
+                        table.remove(player.gun.fireworks, k)
+                        score = score + 1
+                    end
+                end
+                for k, shoot in pairs(enemie.gun.fireworks) do
+                    if player.hitbox:checkColision(shoot.hitbox) then
+                        player.life = player.life - 1
+                        table.remove(enemie.gun.fireworks, k)
+                        if player.life <= 0 then
+                            menu:setState(2)
+                        end
+                    end
                 end
             end
         end
@@ -53,8 +66,9 @@ function Game:update(dt)
         end
     elseif menu:getState() == 0 then 
         menu:update(dt)
+    elseif menu:getState() == 2 and love.keyboard.isDown("return") then
+        self = Game()
     end
-
 end
 
 function Game:draw()
@@ -69,6 +83,8 @@ function Game:draw()
         end
     elseif menu:getState() == 0 then
         menu:draw(dt)
+    elseif menu:getState() == 2 then
+        love.graphics.print("Você se lenhou. Aperte Enter pra voltar pro menu.")
     end
 end
 
@@ -84,6 +100,11 @@ function createEnemie()
     end
     return enemie
 end
+
+function love.keypressed(key, unicode)
+    return unicode == 13
+end
+ 
 
 function generateEnemies(dt)
     dtEnemies = dtEnemies - dt

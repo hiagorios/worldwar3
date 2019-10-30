@@ -7,14 +7,15 @@ function Enemie:new(x, y, imgPath, shootPosition)
     self.direction = -1
     self.acelY = 0
     self.acelX = 0
-    self.acelHoriz = 150
+    self.acelHoriz = 200
     self.acelVert = 150
     self.shootPosition = shootPosition
-    
+    self.gun = Gun()
     self.image = love.graphics.newImage(imgPath.. "/player2.png")
     self.currentImg = 0
     self.width = 150
     self.height = 150
+    self.dtShooting = 1.5
     self.quad = love.graphics.newQuad(0, 0, self.width, self.height, self.image:getDimensions())
     self.state = 'entering'
 
@@ -22,6 +23,7 @@ function Enemie:new(x, y, imgPath, shootPosition)
 end
 
 function Enemie:update(dt)
+    self.gun:update(dt)
     if self.state == 'entering' then
         self.size = self.y*0.004
         self:animate(dt)
@@ -32,13 +34,21 @@ function Enemie:update(dt)
             self.state = 'shooting'
         end
     elseif self.state == 'shooting' then
-        --self:shoot()
-        self.state = 'gettingAway'
-        if self.direction == 1 then
-            self:rotateLeft()
-        else
-            self:rotateRight()
+        if self.dtShooting == 1.5 then
+            self:stop()
+            self.gun:shoot(self.x, self.y, self.direction, self.size, self.width, self.height)
         end
+        if self.dtShooting > 0 then
+            self.dtShooting = self.dtShooting - dt
+        else
+            self.state = 'gettingAway'
+            if self.direction == 1 then
+                self:rotateLeft()
+            else
+                self:rotateRight()
+            end
+        end
+     
     elseif self.state == 'gettingAway' then 
         self.size = self.y*0.004
         self:animate(dt)
@@ -48,9 +58,9 @@ function Enemie:update(dt)
 end
 
 function Enemie:draw()
-    love.graphics.draw(self.image,  self.quad, self.x, self.y, 0, self.direction*self.size, self.size)
     self.hitbox:draw()
-    love.graphics.print(self.state, self.x, self.y)
+    love.graphics.draw(self.image,  self.quad, self.x, self.y, 0, self.direction*self.size, self.size)
+    self.gun:draw(self.quad, self.x, self.y, self.direction, self.size)
 end
 
 function Enemie:stop()

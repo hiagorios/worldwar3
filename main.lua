@@ -6,6 +6,7 @@ function love.load ()
     require('Enemie')
     require('Gun')
     require('HitBox')
+    require('Firework')
     require('Menu')
 
     game = Game()

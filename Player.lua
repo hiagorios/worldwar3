@@ -9,7 +9,7 @@ function Player:new(x, y, imgPath, left, right, up, down, shoot)
     self.acelHoriz = 200
     self.acelVert = 150
     self.size = self.y*0.004
-
+    self.life = 3
     self.gun = Gun()
     self.left = left or 'left'
     self.right = right or 'right'
@@ -47,7 +47,7 @@ function Player:update(dt)
         self:moveDown(dt)
     end
     if love.keyboard.isDown(self.shoot) then
-        self.gun:shoot(self.x, self.y, self.direction, self.size)
+        self.gun:shoot(self.x, self.y, self.direction, self.size, self.width, self.height)
     end
     if not love.keyboard.isDown(self.left) and not love.keyboard.isDown(self.right) and not love.keyboard.isDown(self.down)and not love.keyboard.isDown(self.up) then
         self:stop()
@@ -57,10 +57,12 @@ function Player:update(dt)
 end
 
 function Player:draw()
-    self.gun:draw(self.quad, self.x, self.y, self.direction*self.size, self.size)
     self.hitbox:draw()
-    love.graphics.draw(self.image,  self.quad, self.x, self.y, 0, self.direction*self.size, self.size)
     self.gun:draw(self.quad, self.x, self.y, self.direction*self.size, self.size)
+    love.graphics.draw(self.image,  self.quad, self.x, self.y, 0, self.direction*self.size, self.size)
+    for i = 1, self.life do
+        love.graphics.draw(love.graphics.newImage("assets/image/heart.png"), self.x + (i*25 + 30) *self.size*self.direction, self.y - self.height/8*self.size, 0, self.direction*self.size/7, self.size/7)
+    end
 end
 
 function Player:stop()
