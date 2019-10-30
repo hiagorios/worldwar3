@@ -5,11 +5,7 @@ function love.load ()
     require('Player')
     require('Enemie')
     require('Gun')
-<<<<<<< Updated upstream
     require('HitBox')
-=======
-    require('Firework')
->>>>>>> Stashed changes
     require('Menu')
 
     game = Game()
