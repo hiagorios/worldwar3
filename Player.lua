@@ -26,6 +26,7 @@ function Player:new(x, y, imgPath, left, right, up, down, shoot)
 end
 
 function Player:update(dt)
+    self.gun:update(dt)
     if love.keyboard.isDown(self.left) and not love.keyboard.isDown(self.right) then
         self:animate(dt)
         self:rotateLeft()
@@ -46,7 +47,7 @@ function Player:update(dt)
         self:moveDown(dt)
     end
     if love.keyboard.isDown(self.shoot) then
-        self.gun:shoot()
+        self.gun:shoot(self.x, self.y, self.direction, self.size)
     end
     if not love.keyboard.isDown(self.left) and not love.keyboard.isDown(self.right) and not love.keyboard.isDown(self.down)and not love.keyboard.isDown(self.up) then
         self:stop()
@@ -59,6 +60,7 @@ function Player:draw()
     self.gun:draw(self.quad, self.x, self.y, self.direction*self.size, self.size)
     self.hitbox:draw()
     love.graphics.draw(self.image,  self.quad, self.x, self.y, 0, self.direction*self.size, self.size)
+    self.gun:draw(self.quad, self.x, self.y, self.direction*self.size, self.size)
 end
 
 function Player:stop()
