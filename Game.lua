@@ -96,7 +96,13 @@ function Game:draw()
 end
 
 function createEnemie()
-    local enemie = Enemie(0, 0, 'assets/image/playerGreen', love.math.random(screenWidth*2/3, screenWidth))
+    local color = love.math.random(0,1)
+    if color == 0 then
+        color = 'Yellow'
+    else
+        color = 'Green'
+    end
+    local enemie = Enemie(0, 0, 'assets/image/player'..color, love.math.random(screenWidth*2/3, screenWidth))
     enemie.y = love.math.random(love.graphics.getHeight()/6, screenHeight - enemie.height)
     --enemie.y = screenHeight/2
     enemie.x = love.math.random(0,1)*(screenWidth + enemie.width)
