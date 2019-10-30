@@ -6,10 +6,8 @@ function Game:new()
     screenHeight = love.graphics.getHeight()
     screenWidth = love.graphics.getWidth()
     love.graphics.setNewFont("assets/fonts/vcr.ttf", 20)
-    --[[
-    menuTrack = love.audio.newSource("assets/audio/menu.ogg", "stream")
+    menuTrack = love.audio.newSource("assets/audio/menu.mp3", "stream")
     ingameTrack = love.audio.newSource("assets/audio/ingame.mp3", "stream")
-    --]]
     background = love.graphics.newImage("assets/image/background.png")
     menu = Menu(screenWidth/2 - 20, 200, {'Start Game 1P','Start Game 2P', 'Exit'}, "assets/image/")
     players = {
@@ -61,13 +59,20 @@ function Game:update(dt)
         elseif menu:getSelected() == 1 then
             table.insert(players, player2)
             menu:setState(1)
+            menuTrack:stop()
+            ingameTrack:play()
         else
             menu:setState(1)
+            menuTrack:stop()
+            ingameTrack:play()
         end
     elseif menu:getState() == 0 then 
         menu:update(dt)
+        menuTrack:play()
     elseif menu:getState() == 2 and love.keyboard.isDown("return") then
         self = Game()
+        ingameTrack:stop()
+        menuTrack:play()
     end
 end
 
