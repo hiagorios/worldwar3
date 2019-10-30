@@ -15,7 +15,7 @@ function Game:new()
     players = {
         player = Player(screenWidth/2, screenHeight/2, 'assets/image/playerRed'),
     }
-    player2 = Player(screenWidth/2 - 100, screenHeight/2, 'assets/image/playerRed', "a", "d", "w", "s", "space")
+    player2 = Player(screenWidth/2 - 100, screenHeight/2, 'assets/image/playerBlue', "a", "d", "w", "s", "space")
     score = 0
     enemies = {}
     dtEnemies = 2
@@ -84,12 +84,12 @@ function Game:draw()
     elseif menu:getState() == 0 then
         menu:draw(dt)
     elseif menu:getState() == 2 then
-        love.graphics.print("Você se lenhou. Aperte Enter pra voltar pro menu.")
+        love.graphics.print("Você se lenhou. Aperte Enter pra voltar pro menu.", 100, 550)
     end
 end
 
 function createEnemie()
-    local enemie = Enemie(0, 0, 'assets/image/playerRed', love.math.random(screenWidth*2/3, screenWidth))
+    local enemie = Enemie(0, 0, 'assets/image/playerGreen', love.math.random(screenWidth*2/3, screenWidth))
     --enemie.y = love.math.random(love.graphics.getHeight()/6, screenHeight - enemie.height)
     enemie.y = screenHeight/2
     enemie.x = love.math.random(0,1)*(screenWidth + enemie.width)

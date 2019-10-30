@@ -11,7 +11,7 @@ function Enemie:new(x, y, imgPath, shootPosition)
     self.acelVert = 150
     self.shootPosition = shootPosition
     self.gun = Gun()
-    self.image = love.graphics.newImage(imgPath.. "/player2.png")
+    self.image = love.graphics.newImage(imgPath.. "/player.png")
     self.currentImg = 0
     self.width = 150
     self.height = 150

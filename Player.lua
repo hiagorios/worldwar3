@@ -16,7 +16,7 @@ function Player:new(x, y, imgPath, left, right, up, down, shoot)
     self.up = up or 'up'
     self.down = down or 'down'
     self.shoot = shoot or 'return'
-    self.image = love.graphics.newImage(imgPath.. "/player2.png")
+    self.image = love.graphics.newImage(imgPath.. "/player.png")
     self.width = 150
     self.height = 150
     self.quad = love.graphics.newQuad(0, 0, self.width, self.height, self.image:getDimensions())
