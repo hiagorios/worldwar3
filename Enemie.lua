@@ -60,7 +60,7 @@ end
 function Enemie:draw()
     --self.hitbox:draw()
     love.graphics.draw(self.image,  self.quad, self.x, self.y, 0, self.direction*self.size, self.size)
-    self.gun:draw(self.quad, self.x, self.y, self.direction, self.size)
+    self.gun:draw(self.quad, self.x, self.y, self.direction*self.size, self.size)
 end
 
 function Enemie:stop()
