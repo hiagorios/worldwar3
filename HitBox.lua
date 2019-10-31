@@ -12,6 +12,11 @@ function HitBox:update(x, y, width, height)
     self.y = y
     self.width = width
     self.height = height
+    
+    if self.width < 0 then
+        self.x = self.x + self.width
+        self.width = -self.width
+    end
 end
 
 function HitBox:draw()

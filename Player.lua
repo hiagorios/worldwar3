@@ -22,7 +22,7 @@ function Player:new(x, y, imgPath, left, right, up, down, shoot)
     self.quad = love.graphics.newQuad(0, 0, self.width, self.height, self.image:getDimensions())
     self.currentImg = 0
     
-    self.hitbox = HitBox(self.x + self.size*self.direction*self.width/3, self.y + self.size*20, self.width/2*self.direction*self.size, (self.height - 35)*self.size, self.direction)
+    self.hitbox = HitBox(self.x + self.size*self.direction*self.width/3, self.y + self.size*20, self.width/2*self.direction*self.size, (self.height - 35)*self.size)
 end
 
 function Player:update(dt)
@@ -53,11 +53,11 @@ function Player:update(dt)
         self:stop()
     end
     self.size = self.y*0.004
-    self.hitbox:update(self.x + self.size*self.direction*self.width/3, self.y + self.size*20, self.width/2*self.direction*self.size, (self.height - 35)*self.size, self.direction)
+    self.hitbox:update(self.x + self.size*self.direction*self.width/3, self.y + self.size*20, self.width/2*self.direction*self.size, (self.height - 35)*self.size)
 end
 
 function Player:draw()
-    --self.hitbox:draw()
+    self.hitbox:draw()
     self.gun:draw(self.quad, self.x, self.y, self.direction*self.size, self.size)
     love.graphics.draw(self.image,  self.quad, self.x, self.y, 0, self.direction*self.size, self.size)
     for i = 1, self.life do

@@ -19,7 +19,7 @@ function Enemie:new(x, y, imgPath, shootPosition)
     self.quad = love.graphics.newQuad(0, 0, self.width, self.height, self.image:getDimensions())
     self.state = 'entering'
 
-    self.hitbox = HitBox(self.x + self.size*self.direction*self.width/3, self.y + self.size*20, self.width/2*self.direction*self.size, (self.height - 35)*self.size, self.direction)
+    self.hitbox = HitBox(self.x + self.size*self.direction*self.width/3, self.y + self.size*20, self.width/2*self.direction*self.size, (self.height - 35)*self.size)
 end
 
 function Enemie:update(dt)
@@ -54,11 +54,11 @@ function Enemie:update(dt)
         self:animate(dt)
         self.x = self.x + self.direction*self.acelHoriz*dt
     end
-    self.hitbox:update(self.x + self.size*self.direction*self.width/3, self.y + self.size*20, self.width/2*self.direction*self.size, (self.height - 35)*self.size, self.direction)
+    self.hitbox:update(self.x + self.size*self.direction*self.width/3, self.y + self.size*20, self.width/2*self.direction*self.size, (self.height - 35)*self.size)
 end
 
 function Enemie:draw()
-    --self.hitbox:draw()
+    self.hitbox:draw()
     love.graphics.draw(self.image,  self.quad, self.x, self.y, 0, self.direction*self.size, self.size)
     self.gun:draw(self.quad, self.x, self.y, self.direction*self.size, self.size)
 end

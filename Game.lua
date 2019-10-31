@@ -114,14 +114,9 @@ function createEnemie()
     return enemie
 end
 
-function love.keypressed(key, unicode)
-    return unicode == 13
-end
- 
-
 function generateEnemies(dt)
     dtEnemies = dtEnemies - dt
-    if dtEnemies <= 0 and #enemies <=5 then
+    if dtEnemies <= 0 and #enemies <=3 then
         table.insert(enemies, createEnemie())
         dtEnemies = 1
     end
