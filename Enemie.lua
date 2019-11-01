@@ -54,7 +54,7 @@ function Enemie:update(dt)
         self:animate(dt)
         self.x = self.x + self.direction*self.acelHoriz*dt
     end
-    self.hitbox:update(self.x + self.size*self.direction*self.width/3, self.y + self.size*20, self.width/2*self.direction*self.size, (self.height - 35)*self.size)
+    self.hitbox:update(self.x + self.size*self.direction*self.width/3, self.y + self.size*60, self.width/2*self.direction*self.size, (self.height - 120)*self.size)
 end
 
 function Enemie:draw()

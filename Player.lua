@@ -53,7 +53,7 @@ function Player:update(dt)
         self:stop()
     end
     self.size = self.y*0.004
-    self.hitbox:update(self.x + self.size*self.direction*self.width/3, self.y + self.size*20, self.width/2*self.direction*self.size, (self.height - 35)*self.size)
+    self.hitbox:update(self.x + self.size*self.direction*self.width/3, self.y + self.size*60, self.width/2*self.direction*self.size, (self.height - 120)*self.size)
 end
 
 function Player:draw()

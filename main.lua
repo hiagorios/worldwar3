@@ -8,6 +8,7 @@ function love.load ()
     require('HitBox')
     require('Firework')
     require('Menu')
+    require('Util')
 
     game = Game()
 end

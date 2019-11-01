@@ -18,6 +18,7 @@ function Game:new()
     enemies = {}
     dtEnemies = 2
     state = 0
+    util = Util()
 end
 
 function Game:update(dt)
@@ -28,7 +29,7 @@ function Game:update(dt)
 
         for i, enemie in pairs(enemies) do 
             enemie:update(dt)
-            if enemie:mustBeRemoved() then
+            if enemie.state == 'gettingAway' and util:mustBeRemoved(enemie) then
                 table.remove(enemies, i)
             end
         end
@@ -85,6 +86,7 @@ function Game:draw()
         love.graphics.rectangle('fill', 0, 0, 200, 40)
         love.graphics.setColor(255,255,255)
         love.graphics.print('Score:' .. score, 0, 0, 0, 2, 2)
+        love.graphics.print('Enemies:' .. #enemies, 0, 40, 0, 2, 2)
         for i, enemie in pairs(enemies) do
             enemie:draw(dt)
         end

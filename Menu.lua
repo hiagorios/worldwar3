@@ -10,13 +10,13 @@ function Menu:new(x,y, options, imgPath)
     self.y = y
     self.offsetY = 10
     self.yOption = 0
-    self.optionSelect = 0
+    self.optionSelected = 0
     self.options = options
     self.internalState = 0
 end
 
 function Menu:getSelected()
-    return self.optionSelect
+    return self.optionSelected
 end
 
 function Menu:getState()
@@ -29,16 +29,16 @@ end
 
 function Menu:update(dt)
     if love.keyboard.isDown("down") and not pressedKey then
-        self.optionSelect = self.optionSelect < #self.options - 1 and self.optionSelect + 1 or #self.options - 1
+        self.optionSelected = self.optionSelected < #self.options - 1 and self.optionSelected + 1 or #self.options - 1
         pressedKey = true
     elseif love.keyboard.isDown("up") and not pressedKey then
-        self.optionSelect = self.optionSelect > 0 and self.optionSelect - 1  or 0
+        self.optionSelected = self.optionSelected > 0 and self.optionSelected - 1  or 0
         pressedKey = true
     elseif not love.keyboard.isDown("down") and not love.keyboard.isDown("up") then
         pressedKey = false
     end
 
-    self.yBox = self.y + (self.optionSelect * self.offsetY*6 + 2) - self.boxH/3
+    self.yBox = self.y + (self.optionSelected * self.offsetY*6 + 2) - self.boxH/3
 end
 
 function Menu:draw(dt)
